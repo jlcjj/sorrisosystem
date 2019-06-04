@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+		<h:form id="formCadastro" prependId="false">
+			<c:set var="isCadastro" value="true" scope="view" />
+			<p:panel header="Cadastro de Agendamentos" id="panelCadastro">
+				<h:panelGrid id="gridAgendamentos" columns="3">
+					<p:column>
+						<p:row>
+							<h:outputLabel for="agendamento_id" value="codigo: " id="labelId" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<p:inputText id="agendamento_id" styleClass="estiloIdCadastro"
+								disabled="true"
+								value="#{agendamentosBeanView.objetoSelecionado.agendamento_id}" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelNomeCliente" for="cliente"
+								value="Nome do Cliente :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:selectOneMenu id="cliente"
+								value="#{agendamentosBeanView.objetoSelecionado.clientes}">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{cllientesBeanView.clientes}" />
+							</p:selectOneMenu>
+
+
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelNomeMedicoConsultaAgendamento"
+								for="nomeMedico" value="Cirurgião Dentista" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputText id="nomeMedico" styleClass="estyleInputNomeMedico"
+								maxlength="80"
+								value="#{agendamentosBeanView.objetoSelecionado.nomeMedico}"
+								style="width: 550px;" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelDataConsultaAgendamento" for="data"
+								value="Data Agendada * :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputMask mask="99/99/9999" id="data"
+								styleClass="estyleInputData" required="false" maxlength="20"
+								value="#{agendamentosBeanView.objetoSelecionado.data_agendamento}"
+								requiredMessage="Informe a data do agendamento" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:message for="data" />
+						</p:row>
+					</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelHorarioAgendamento" for="horario"
+								value="Horario Agendado * :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputMask id="horario" mask="99:99"
+								value="#{agendamentosBeanView.objetoSelecionado.horario_agendamento}" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelProcedimentoAgendamento"
+								for="procedimento" value="Procedimento :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputText id="procedimento"
+								styleClass="estyleInputProcedimento"
+								value="#{agendamentosBeanView.objetoSelecionado.procedimento}"
+								required="false" maxlength="100" style="width: 750px;" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+				</h:panelGrid>
+
+
+
+
+				<p:fieldset legend="Realizados" style="margin-bottom:20px">
+
+					<h:panelGrid id="gridRealizados" columns="3" cellpadding="5">
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelNomeRealizadoCliente"
+									for="nome_realizado" value="Realizado Por :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+								<p:inputText
+									value="#{agendamentosBeanView.objetoSelecionado.nome_realizado}"
+									id="nome_realizado" styleClass="estyleInputNomeRealizado"
+									maxlength="100" style="width: 550px;" />
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelDataRealizadoConsultaAgendamento"
+									for="data_realizado" value="Data Realizado * :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+								<p:inputMask mask="99/99/9999" id="data_realizado"
+									styleClass="estyleInputData" maxlength="20"
+									value="#{agendamentosBeanView.objetoSelecionado.data_realizado}" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+								<p:message for="data_realizado" />
+							</p:row>
+						</p:column>
+
+
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelHorarioRealizadoAgendamento"
+									for="horario_realizado" value="Horario Realizado * :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+								<p:inputMask id="horario_realizado" mask="99:99"
+									value="#{agendamentosBeanView.objetoSelecionado.horario_realizado}" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+					</h:panelGrid>
+				</p:fieldset>
+
+				<p:column>
+					<p:row>
+						<h:outputLabel id="labelStatusAgendamento" for="status"
+							value="Status :" />
+					</p:row>
+				</p:column>
+				<p:column>
+					<p:row>
+						<p:selectOneMenu id="status"
+							value="#{agendamentosBeanView.objetoSelecionado.status}"
+							style="width:125px">
+							<f:selectItem itemLabel="Selecione um" itemValue="" />
+							<f:selectItem itemLabel="Agendado" itemValue="Agendado" />
+							<f:selectItem itemLabel="Aguardando" itemValue="Aguardando" />
+							<f:selectItem itemLabel="Em Atendimento" itemValue="Em Atendimento" />
+							<f:selectItem itemLabel="Faltou" itemValue="Faltou" />
+							<f:selectItem itemLabel="Remarcado" itemValue="Remarcado" />
+							<f:selectItem itemLabel="Atendido" itemValue="Atendido" />
+						</p:selectOneMenu>
+
+
+					</p:row>
+				</p:column>
+				<p:column>
+					<p:row>
+
+					</p:row>
+				</p:column>
+
+
+
+
+
+
+
+
+
+			</p:panel>
+
+			<div class="espacoBranco" />
+			<p:commandButton value="Salvar" ajax="true"
+				action="#{agendamentosBeanView.save}" />
+			<p:commandButton value="Novo" ajax="false"
+				action="#{agendamentosBeanView.novo}" />
+		</h:form>
+
+		<script type="text/javascript" charset="UTF-8">
+			addFocoCampo("cliente");
+			gerenciaTeclaEnter();
+		</script>
+	<div class="espacoBranco" />
+
+		<p:dataTable id="tableResult" value="#{agendamentosBeanView.list}"
+			var="objeto" emptyMessage="Não existem valores a serem exibidos!"
+			rows="10" paginatorPosition="bottom" paginator="true"
+			rendered="#{agendamentosBeanView.list.size() > 0}"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} 
+								{PageLinks} {NextPageLink} {LastPageLink}
+								{RowsPerPageDropdown}">
+			<p:column style="width:100px">
+				<center>
+					<f:facet name="header">Código</f:facet>
+					<h:outputText value="#{objeto.agendamento_id}"></h:outputText>
+				</center>
+			</p:column>
+
+			<p:column style="width:650px">
+				<center>
+					<f:facet name="header">Paciente</f:facet>
+					<h:outputText value="#{objeto.clientes.nome}"></h:outputText>
+				</center>
+			</p:column>
+
+			<p:column style="width:150px">
+				<center>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{objeto.data_agendamento}"></h:outputText>
+				</center>
+			</p:column>
+
+			<p:column style="width:150px">
+				<center>
+					<f:facet name="header">Hora</f:facet>
+					<h:outputText value="#{objeto.horario_agendamento}"></h:outputText>
+				</center>
+			</p:column>
+
+			<p:column>
+				<center>
+					<f:facet name="header">Médico</f:facet>
+					<h:outputText value="#{objeto.nomeMedico}"></h:outputText>
+				</center>
+			</p:column>
+
+		<sec:ifAnyGranted roles="AGENDAMENTO_EDITAR, ADMIN">
+			<p:column style="width:50px">
+				<center>
+					<f:facet name="header">Editar</f:facet>
+					<p:commandLink action="#{agendamentosBeanView.editar}"
+						update="formCadastro" id="editarAgendamentos"
+						ajax="false" immediate="false">
+						<h:graphicImage value="/resources/img/editar16.png"/>
+						<f:setPropertyActionListener value="#{objeto}"
+							target="#{agendamentosBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+					</p:commandLink>
+				</center>
+			</p:column>
+		</sec:ifAnyGranted>
+		<sec:ifAnyGranted roles="AGENDAMENTO_EXCLUIR, ADMIN">
+			<p:column style="width:50px">
+				<center>
+					<f:facet name="header">Excluir</f:facet>
+					<p:commandLink action="#{agendamentosBeanView.excluir}"
+						update="tableResult" id="excluirAgendamentos" 
+						ajax="true" immediate="true"
+						onclick="if(!confirm('Confirma a exclusão?')) return false;">
+						<h:graphicImage value="/resources/img/excluir16.png"/>
+						<f:setPropertyActionListener value="#{objeto}"
+							target="#{agendamentosBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+					</p:commandLink>
+				</center>
+			</p:column>
+		</sec:ifAnyGranted>
+		</p:dataTable>
+	</ui:define>
+
+
+
+</ui:composition>
+
+
+</html>

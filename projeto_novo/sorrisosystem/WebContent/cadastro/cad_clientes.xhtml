@@ -1,0 +1,661 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+		<h:form id="formCadastro" prependId="false">
+			<c:set var="isCadastro" value="true" scope="view" />
+			<p:panel header="Cadastro de Clientes" id="panelCadastro">
+				<h:panelGrid id="gridClientes" columns="3">
+					<p:column>
+						<p:row>
+							<h:outputLabel for="id" value="codigo: " id="labelId" rendered="false"/>
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<p:inputText id="id" styleClass="estiloIdCadastro"
+								disabled="true"
+								value="#{clientesBeanView.objetoSelecionado.cliente_id}" rendered="false"/>
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelProntuarioConsultaCliente"
+								for="clienteProntuario" value="Prontuario" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputText id="clienteProntuario" disabled="true"
+								styleClass="estyleInputProntuario" maxlength="80"
+								value="#{clientesBeanView.objetoSelecionado.prontuario}" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelNomeConsultaCliente" for="clienteNome"
+								value="Nome * :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputText id="clienteNome" styleClass="estyleInputNome"
+								required="false" maxlength="80"
+								value="#{clientesBeanView.objetoSelecionado.nome}"
+								requiredMessage="Informe o nome do Cliente" size="100" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:message for="clienteNome" />
+						</p:row>
+					</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labeldtNascConsultaCliente"
+								for="data_nascimento" value="Dt Nascimento * :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputMask id="data_nascimento" mask="99/99/9999"
+								value="#{clientesBeanView.objetoSelecionado.data_nascimento}" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelRgCliente" for="rg" value="RG :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputText id="rg" styleClass="estyleInputRg"
+								value="#{clientesBeanView.objetoSelecionado.rg}"
+								 maxlength="15" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelCpfCliente" for="cpf" value="CPF :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputMask mask="999.999.999-99"
+								value="#{clientesBeanView.objetoSelecionado.cpf}" id="cpf"
+								styleClass="estyleInputCpf" maxlength="11" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelEnderecoCliente" for="endereco"
+								value="Endereço :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputText
+								value="#{clientesBeanView.objetoSelecionado.endereco}"
+								 id="endereco" style="width: 550px;"
+								maxlength="100" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelNumeroCliente" for="numero" value="Nº :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputText value="#{clientesBeanView.objetoSelecionado.numero}"
+								 id="numero" styleClass="estyleInputNumero"
+								maxlength="100" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelComplementoCliente" for="complemento"
+								value="Complemento :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputText
+								value="#{clientesBeanView.objetoSelecionado.complemento}"
+								 id="complemento" style="width: 350px;"
+								maxlength="100" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelBairroCliente" for="bairro"
+								value="Bairro :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputText value="#{clientesBeanView.objetoSelecionado.bairro}"
+								 id="bairro" style="width: 350px;"
+								maxlength="100" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelCepCliente" for="cep" value="CEP :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputMask mask="99.999-999"
+								value="#{clientesBeanView.objetoSelecionado.cep}"
+								 id="cep" style="width: 100px;" maxlength="100"
+								onblur="pesquisacep(this.value);" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelCidadeUfCliente" for="cidadeUf"
+								value="Cidade - UF :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputText value="#{clientesBeanView.objetoSelecionado.cidade}"
+								 id="cidade" style="width: 400px;"
+								maxlength="100" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+									UF : <p:inputText
+								value="#{clientesBeanView.objetoSelecionado.UF}"
+								 id="UF" style="width: 50px;" maxlength="2" />
+
+						</p:row>
+					</p:column>
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelTelFixoCliente" for="tel_fixo"
+								value="Tel. Fixo :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputMask mask="(99)9999-9999"
+								value="#{clientesBeanView.objetoSelecionado.tel_fixo}"
+								 id="tel_fixo" style="width: 150px;"
+								maxlength="20" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelTelCelularCliente" for="tel_celular"
+								value="Celular :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputMask mask="(99)9 9999-9999"
+								value="#{clientesBeanView.objetoSelecionado.tel_celular}"
+								 id="tel_celular" style="width: 150px;"
+								maxlength="20" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+
+				</h:panelGrid>
+
+				<p:fieldset legend="Titularidade" style="margin-bottom:20px">
+
+					<h:panelGrid id="gridTitular" columns="3" cellpadding="5">
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelTitularCliente" for="titular"
+									value="Titular :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+								<p:selectOneMenu id="titular"
+									value="#{clientesBeanView.objetoSelecionado.titular}"
+									style="width:125px" required="false"
+									requiredMessage="Obrigatório informar se é o titular!!">
+									<f:selectItem itemLabel="Selecione Um" itemValue="" />
+									<f:selectItem itemLabel="Sim" itemValue="Sim" />
+									<f:selectItem itemLabel="Não" itemValue="Não" />
+									<p:ajax event="change" />
+								</p:selectOneMenu>
+
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelNomeTitularCliente" for="nome_titular"
+									value="Nome do Titular :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+								<p:selectOneMenu
+									value="#{clientesBeanView.objetoSelecionado.nome_titular}"
+									id="nome_titular">
+									<f:selectItem itemLabel="Selecione Um" itemValue="" />
+									<f:selectItems value="#{clientesBeanView.clientes}" />
+								</p:selectOneMenu>
+
+
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+					</h:panelGrid>
+				</p:fieldset>
+
+
+
+
+				<p:fieldset legend="Convenio" style="margin-bottom:20px">
+
+					<h:panelGrid id="gridConvenio" columns="3" cellpadding="5">
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelNomeConvenioCliente" for="nome_Convenio"
+									value="Nome do Convenio :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+								<p:inputText
+									value="#{clientesBeanView.objetoSelecionado.nome_Convenio}"
+									 id="nome_Convenio" style="width: 450px;"
+									maxlength="20" />
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelPlanoCliente" for="plano"
+									value="Plano :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+								<p:inputText value="#{clientesBeanView.objetoSelecionado.plano}"
+									id="plano" style="width: 450px;"
+									maxlength="20" />
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelNumCartCliente" for="numCart"
+									value="Nº. Cartão :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+								<p:inputText
+									value="#{clientesBeanView.objetoSelecionado.num_cart_convenio}"
+									id="numCart" style="width: 150px;"
+									maxlength="20" />
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelDataCartCliente"
+									for="data_validade_plano" value="Validade Cartão :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+								<p:inputMask mask="99/99/9999"
+									value="#{clientesBeanView.objetoSelecionado.data_validade_plano}"
+									pattern="MM/dd/yyyy" id="data_validade_plano"
+									style="width: 150px;" maxlength="20" />
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+
+					</h:panelGrid>
+				</p:fieldset>
+
+
+
+
+
+				<p:fieldset legend="Sindicato" style="margin-bottom:20px">
+
+					<h:panelGrid id="gridSindicato" columns="3" cellpadding="5">
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelNomeSindicatoCliente"
+									for="nome_sindicato" value="Nome do Sindicato :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+								<p:inputText
+									value="#{clientesBeanView.objetoSelecionado.nome_sindicato}"
+									id="nome_sindicato" style="width: 450px;"
+									maxlength="20" />
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelNumCartSindCliente"
+									for="num_cart_sindicato" value="Nº. Carteirinha :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+								<p:inputText
+									value="#{clientesBeanView.objetoSelecionado.num_cart_sindicato}"
+									id="num_cart_sindicato" style="width: 150px;"
+									maxlength="20" />
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+
+
+					</h:panelGrid>
+				</p:fieldset>
+
+
+
+
+				<h:panelGrid id="gridClient" columns="3" cellpadding="5">
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelObservacaoCliente" for="observacao"
+								value="Observação :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputText
+								value="#{clientesBeanView.objetoSelecionado.observacao}"
+								id="observacao" style="width: 750px;"
+								maxlength="400" />
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelStatusCliente" for="status"
+								value="Status :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:selectOneMenu id="Situacao"
+								value="#{clientesBeanView.objetoSelecionado.status}"
+								style="width:125px">
+								<f:selectItem itemLabel="Selecione Um" itemValue="" />
+								<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+								<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+
+							</p:selectOneMenu>
+
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+				</h:panelGrid>
+
+
+
+			</p:panel>
+			
+			
+			
+			<div class="espacoBranco" />
+
+			<util:botoesCrud managedBeanView="#{clientesBeanView}"
+				camposReload=":formTemplate:msg, tableResult"
+				botaoNovo="#{contextoBean.possuiAcesso('CLIENTES_NOVO','ADMIN')}"
+				botaoSalvar="#{contextoBean.possuiAcesso('CLIENTES_NOVO','ADMIN') and clientesBeanView.objetoSelecionado.cliente_id == null}"
+				botaoAtualizar="#{contextoBean.possuiAcesso('CLIENTES_EDITAR', 'ADMIN') and clientesBeanView.objetoSelecionado.cliente_id != null}"
+				botaoExcluir="#{contextoBean.possuiAcesso('CLIENTES_EXCLUIR', 'ADMIN')}" />
+			
+			
+			
+		</h:form>
+
+
+		<script type="text/javascript" charset="UTF-8">
+			addFocoCampo("cliente");
+			gerenciaTeclaEnter();
+		</script>
+		<div class="espacoBranco" />
+
+		<p:dataTable id="tableResult" value="#{clientesBeanView.list}"
+			var="objeto" emptyMessage="Não existem valores a serem exibidos!"
+			rows="10" paginatorPosition="bottom" paginator="true"
+			rendered="#{clientesBeanView.list.list.size() > 0}"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} 
+								{PageLinks} {NextPageLink} {LastPageLink}
+								{RowsPerPageDropdown}">
+			
+				<ui:include src="/resources/components/colunasDataTableClientes.xhtml"></ui:include>
+
+
+
+
+		</p:dataTable>
+
+
+	</ui:define>
+
+
+
+</ui:composition>
+
+
+</html> 	

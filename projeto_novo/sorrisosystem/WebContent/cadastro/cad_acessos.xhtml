@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+		<h:form id="formCadastro" prependId="false">
+			<c:set var="isCadastro" value="true" scope="view" />
+			<p:panel header="Cadastro de Acessos" id="panelCadastro">
+				<h:panelGrid id="gridAcessos" columns="3">
+					<p:column>
+						<p:row>
+							<h:outputLabel for="ent_acesso_id" value="codigo: " id="labelId" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<p:inputText id="ent_acesso_id" styleClass="estiloIdCadastro"
+								disabled="true"
+								value="#{entidadeAcessoBeanView.objetoSelecionado.ent_acesso_id}" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelNomeCliente" for="ent_codigo"
+								value="Nome do Usuario :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:selectOneMenu id="ent_codigo"
+								value="#{entidadeAcessoBeanView.objetoSelecionado.entidade}">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{entidadeBeanView.entidade}" />
+							</p:selectOneMenu>
+
+
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelNomeRoleConsultaAgendamento"
+								for="esa_codigo" value="Tipo Permissão" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:selectOneMenu id="esa_codigo"
+								value="#{entidadeAcessoBeanView.objetoSelecionado.esa_codigo}">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItem itemLabel="ADMIN" itemValue="ADMIN" />
+								<f:selectItem itemLabel="USER" itemValue="USER" />
+								<f:selectItem itemLabel="APROV" itemValue="APROV" />
+								<f:selectItem itemLabel="DIRECT" itemValue="UDIRECTSER" />
+
+							</p:selectOneMenu>
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+				</h:panelGrid>
+
+
+			</p:panel>
+
+			<div class="espacoBranco" />
+			<p:commandButton value="Salvar" ajax="false"
+				action="#{entidadeAcessoBeanView.save}" />
+			<p:commandButton value="Novo" ajax="false"
+				action="#{entidadeAcessoBeanView.novo}" />
+		</h:form>
+		<script type="text/javascript" charset="UTF-8">
+			addFocoCampo("cliente");
+			gerenciaTeclaEnter();
+		</script>
+		<div class="espacoBranco" />
+
+		<p:dataTable id="tableResult" value="#{entidadeAcessoBeanView.list}"
+			var="objeto" emptyMessage="Não existem valores a serem exibidos!"
+			rows="2" paginatorPosition="bottom" paginator="true"
+			rendered="#{entidadeAcessoBeanView.list.size() > 0}"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} 
+								{PageLinks} {NextPageLink} {LastPageLink}
+								{RowsPerPageDropdown}">
+			<p:column style="width:100px">
+				<center>
+					<f:facet name="header">Código</f:facet>
+					<h:outputText value="#{objeto.ent_acesso_id}"></h:outputText>
+				</center>
+			</p:column>
+			<p:column style="width:650px">
+				<center>
+					<f:facet name="header">Usuario</f:facet>
+					<h:outputText value="#{objeto.entidade.ent_nome}"></h:outputText>
+				</center>
+			</p:column>
+			
+		<p:column style="width:150px">
+				<center>
+					<f:facet name="header">Tipo Acesso</f:facet>
+					<h:outputText value="#{objeto.esa_codigo}"></h:outputText>
+				</center>
+			</p:column>			
+			
+	<sec:ifAnyGranted roles="ENTIDADE_ACESSO_EDITAR, ADMIN">
+			<p:column style="width:50px">
+				<center>
+					<f:facet name="header">Editar</f:facet>
+					<p:commandLink action="#{entidadeAcessoBeanView.editar}"
+						update="formCadastro" id="editarEntidadeAcesso"
+						ajax="false" immediate="false">
+						<h:graphicImage value="/resources/img/editar16.png"/>
+						<f:setPropertyActionListener value="#{objeto}"
+							target="#{entidadeAcessoBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+					</p:commandLink>
+				</center>
+			</p:column>
+		</sec:ifAnyGranted>
+		<sec:ifAnyGranted roles="ENTIDADE_ACESSO_EXCLUIR, ADMIN">
+			<p:column style="width:50px">
+				<center>
+					<f:facet name="header">Excluir</f:facet>
+					<p:commandLink action="#{entidadeAcessoBeanView.excluir}"
+						update="tableResult" id="excluirEntidadeAcesso" 
+						ajax="true" immediate="true"
+						onclick="if(!confirm('Confirma a exclusão?')) return false;">
+						<h:graphicImage value="/resources/img/excluir16.png"/>
+						<f:setPropertyActionListener value="#{objeto}"
+							target="#{entidadeAcessoBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+					</p:commandLink>
+				</center>
+			</p:column>
+		</sec:ifAnyGranted>			
+			
+			
+		</p:dataTable>
+
+
+	</ui:define>
+</ui:composition>
+
+
+</html>

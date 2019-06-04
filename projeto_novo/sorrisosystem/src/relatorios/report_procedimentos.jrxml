@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_procedimentos" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="44d9d84f-7a07-4226-922b-622b4b8b6f7c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_PARAMETERS_IMG" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="codigo_interno" class="java.lang.String">
+		<fieldDescription><![CDATA[codigo_interno]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="valor_procedimento" class="java.lang.String">
+		<fieldDescription><![CDATA[valor_procedimento]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="418" height="63" uuid="09f451db-fc79-4dec-a173-181309ed8ad9"/>
+				<textElement>
+					<font size="30" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Procedimentos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="419" y="0" width="337" height="63" uuid="39257d5b-128f-407e-89fb-3ebbbfc00ec4"/>
+				<imageExpression><![CDATA[$P{REPORT_PARAMETERS_IMG} + "life_baner.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="15" width="100" height="20" uuid="e558a589-9503-4fd8-84e7-b74751e457c2"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="15" width="319" height="20" uuid="ad0e8a25-5a67-4b2a-a164-65137ceb2042"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="15" width="100" height="20" uuid="a70f8597-feb3-47dc-a546-7525a9b50c39"/>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="a5a3483f-a342-4dce-8e9d-828224eb9331"/>
+				<textFieldExpression><![CDATA[$F{codigo_interno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="318" height="20" uuid="b15bcba2-d745-4a1c-99ef-81a1094948f3"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="100" height="20" uuid="a2191602-885e-40c0-bd39-f37546fcb3a4"/>
+				<textFieldExpression><![CDATA[$F{valor_procedimento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="341" y="0" width="214" height="20" uuid="b45c2e07-eaa5-4b58-886e-6702a480f8ed"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<noData>
+		<band height="20">
+			<staticText>
+				<reportElement x="223" y="0" width="100" height="20" uuid="88df382b-cae4-4be6-9454-09c4c6e92d00"/>
+				<text><![CDATA[Não há Dados]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

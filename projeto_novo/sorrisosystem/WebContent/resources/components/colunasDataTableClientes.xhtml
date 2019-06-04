@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<p:column style="width:100px" rendered="false">
+	<center>
+		<f:facet name="header">Código</f:facet>
+		<h:outputText value="#{objeto.cliente_id}"></h:outputText>
+	</center>
+</p:column>
+<p:column style="width:100px">
+	<center>
+		<f:facet name="header">Prontuario</f:facet>
+		<h:outputText value="#{objeto.prontuario}"></h:outputText>
+	</center>
+</p:column>
+<p:column style="width:650px">
+	<center>
+		<f:facet name="header">Nome</f:facet>
+		<h:outputText value="#{objeto.nome}"></h:outputText>
+	</center>
+</p:column>
+<p:column style="width:150px">
+	<center>
+		<f:facet name="header">Tel. Fixo</f:facet>
+		<h:outputText value="#{objeto.tel_fixo}"></h:outputText>
+	</center>
+</p:column>
+<p:column style="width:150px">
+	<center>
+		<f:facet name="header">Celular</f:facet>
+		<h:outputText value="#{objeto.tel_celular}"></h:outputText>
+	</center>
+</p:column>
+
+		<sec:ifAnyGranted roles="CLIENTE_EDITAR, ADMIN">
+				<p:column style="width:50px">
+					<center>
+						<f:facet name="header">Editar</f:facet>
+						<p:commandLink action="#{clientesBeanView.editar}"
+							update="formCadastro" id="editarClilente" ajax="false"
+							immediate="false">
+							<h:graphicImage value="/resources/img/editar16.png" />
+							<f:setPropertyActionListener value="#{objeto}"
+								target="#{clientesBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+						</p:commandLink>
+					</center>
+				</p:column>
+			</sec:ifAnyGranted>
+			<sec:ifAnyGranted roles="CLIENTE_EXCLUIR, ADMIN">
+				<p:column style="width:50px">
+					<center>
+						<f:facet name="header">Excluir</f:facet>
+						<p:commandLink action="#{clientesBeanView.excluir}"
+							update="tableResult" id="excluirCliente" ajax="true"
+							immediate="false"
+							onclick="if(!confirm('Confirma a exclusão?')) return false;">
+							<h:graphicImage value="/resources/img/excluir16.png" />
+							<f:setPropertyActionListener value="#{objeto}"
+								target="#{clientesBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+						</p:commandLink>
+					</center>
+				</p:column>
+			</sec:ifAnyGranted>
+
+
+
+</html>

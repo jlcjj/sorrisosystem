@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+		<h:form id="formCadastro" prependId="false">
+			<c:set var="isCadastro" value="true" scope="view" />
+			<p:panel header="Cadastro de Avaliações" id="panelCadastro">
+				<h:panelGrid id="gridAvaliacao" columns="3">
+					<p:column>
+						<p:row>
+							<h:outputLabel for="avaliacao_id" value="codigo: " id="labelId" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<p:inputText id="avaliacao_id" styleClass="estiloIdCadastro"
+								disabled="true"
+								value="#{avaliacaoBeanView.objetoSelecionado.avaliacao_id}" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelNomeCliente" for="tipoAval"
+								value="Tipo :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:selectOneMenu id="tipoAval" required="true"
+								value="#{avaliacaoBeanView.objetoSelecionado.tipoAval}" requiredMessage="Campo Obrigatorio." >
+								<f:selectItem itemLabel=" " itemValue="" />
+								<f:selectItem itemLabel="Avaliação" itemValue="Avaliação" />
+							</p:selectOneMenu>
+
+
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelProntuarioConsultaAvaliacao"
+								for="cliente" value="Prontuario" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:selectOneMenu id="cliente" required="true"
+								value="#{avaliacaoBeanView.objetoSelecionado.clientes}" requiredMessage="Selecione um Cliente valido." >
+								<f:selectItem itemLabel=" " itemValue="" />
+								<f:selectItems value="#{cllientesBeanView.prontuario}" />
+								<p:ajax event="change" update="nomeCliente" />
+							</p:selectOneMenu>
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel for="nomeCliente" value="nomeCliente "
+								id="labelNome" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<p:inputText id="nomeCliente" styleClass="estiloIdCadastro"
+								disabled="true"
+								value="#{avaliacaoBeanView.objetoSelecionado.clientes.nome}"
+								style="width: 550px;" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<p:message for="cliente" />
+						</p:row>
+					</p:column>
+
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelDataConsultaAgendamento"
+								for="data_avaliacao" value="Data Agendada * :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputMask mask="99/99/9999" id="data_avaliacao"
+								styleClass="estyleInputData" required="true" maxlength="20"
+								value="#{avaliacaoBeanView.objetoSelecionado.data_avaliacao}"
+								requiredMessage="Informe a data." />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:message for="data_avaliacao" />
+						</p:row>
+					</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelHorarioAgendamento"
+								for="horario_agendamento" value="Horario Chegada * :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputMask id="horario_agendamento" mask="99:99"
+								value="#{avaliacaoBeanView.objetoSelecionado.horario_agendamento}" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+
+					<p:column rendered="false">
+						<p:row>
+							<h:outputLabel id="labelStatusAgendamento" for="status"
+								value="Status :" />
+						</p:row>
+					</p:column>
+					<p:column rendered="false">
+						<p:row>
+							<p:selectOneMenu id="status"
+								value="#{avaliacaoBeanView.objetoSelecionado.status}"
+								style="width:125px">
+								
+								<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+								
+
+							</p:selectOneMenu>
+
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+
+
+
+				</h:panelGrid>
+
+
+			</p:panel>
+
+
+			<div class="espacoBranco" />
+
+			<util:botoesCrud managedBeanView="#{avaliacaoBeanView}"
+				camposReload=":formTemplate:msg, tableResult"
+				botaoNovo="#{contextoBean.possuiAcesso('AVALIACAO_NOVO','ADMIN')}"
+				botaoSalvar="#{contextoBean.possuiAcesso('AVALIACAO_NOVO','ADMIN') and avaliacaoBeanView.objetoSelecionado.avaliacao_id == null}"
+				botaoAtualizar="#{contextoBean.possuiAcesso('AVALIACAO_EDITAR', 'ADMIN') and avaliacaoBeanView.objetoSelecionado.avaliacao_id != null}"
+				botaoExcluir="#{contextoBean.possuiAcesso('AVALIACAO_EXCLUIR', 'ADMIN')}" />
+
+
+		</h:form>
+
+
+		<script type="text/javascript" charset="UTF-8">
+			addFocoCampo("cliente");
+			gerenciaTeclaEnter();
+		</script>
+		<div class="espacoBranco" />
+
+		<p:dataTable id="tableResult" value="#{avaliacaoBeanView.list.list}"
+			var="objeto" emptyMessage="Não existem valores a serem exibidos!"
+			rows="10" paginatorPosition="bottom" paginator="true"
+			rendered="#{avaliacaoBeanView.list.list.size() > 0}"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} 
+								{PageLinks} {NextPageLink} {LastPageLink}
+								{RowsPerPageDropdown}">
+
+
+			<ui:include
+				src="/resources/components/colunasDataTableAvaliacao.xhtml"></ui:include>
+
+		</p:dataTable>
+	</ui:define>
+
+
+
+</ui:composition>
+
+
+</html>

@@ -1,0 +1,1044 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+		<h:form id="formCadastro" prependId="false">
+			<c:set var="isCadastro" value="true" scope="view" />
+			<p:panel header="Cadastro de Avaliações" id="panelCadastro">
+
+				<h:panelGrid id="gridSelecao" columns="3" style="margin-bottom:10px"
+					cellpadding="5">
+					<h:panelGrid id="gridAgendamentos" columns="3">
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelNomeCliente" for="cliente"
+									value="Nome do Cliente :" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+								<p:selectOneMenu id="cliente"
+									value="#{agendamentosBeanView.objetoSelecionado.clientes}">
+									<f:selectItem itemLabel="Select One" itemValue="" />
+									<f:selectItems value="#{clientesBeanView.clientes}" />
+								</p:selectOneMenu>
+
+
+
+							</p:row>
+						</p:column>
+
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+						<p:column>
+							<p:row>
+								<h:outputLabel id="labelObservacaoOdontograma" for="Observacao"
+									value="Observações gerais.!!" />
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+								<p:inputTextarea id="Observacao" rows="10" cols="50"
+									queryDelay="750" minQueryLength="4"
+									value="#{agendamentosBeanView.objetoSelecionado.nomeMedico}" />
+
+							</p:row>
+						</p:column>
+						<p:column>
+							<p:row>
+
+							</p:row>
+						</p:column>
+
+
+
+
+						<p:column>
+							<p:row>
+								<p:commandButton value="Novo"
+									style="height:40px;width:100px;background:#CDCDC1;border: 1px solid #FFFFFF;"
+									actionListener="#{cc.attrs.avaliacaoBeanView.salvar}"
+									ajax="false" partialSubmit="true" process="@this, @form"
+									id="buttonSalvarAtemdimento" immediate="false">
+								</p:commandButton>
+
+							</p:row>
+						</p:column>
+					</h:panelGrid>
+
+				</h:panelGrid>
+				<p:accordionPanel>
+					<p:tab title="Arcada Adulta">
+						<h:panelGrid id="gridAdulto" columns="17"
+							style="text-align: center;">
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="18.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="17.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="16.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="15.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="14.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="13.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="12.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="11.PNG" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+									<p:dialog header="Especificações." widgetVar="dlg2" modal="true"
+										height="500">
+										<p:panelGrid columns="2" style="text-align: left;">
+											<p:column>
+												<p:row>
+													<h:outputLabel for="nomeDente" value="Descrição: "
+														id="labelNomeDente" />
+												</p:row>
+											</p:column>
+											<p:column>
+												<p:row>
+													<p:inputText id="nomeDente" styleClass="estiloIdCadastro"
+														disabled="true" value="#{dentesView.descricao}"
+														style="width: 550px;" />
+												</p:row>
+											</p:column>
+											<p:column>
+												<p:row>
+													<h:outputLabel id="labelProcedimentoAgendamento"
+														for="procedimento" value="Procedimento :" />
+												</p:row>
+											</p:column>
+											<p:column>
+												<p:row>
+													<p:selectOneMenu id="procedimento"
+														value="#{agendamentosBeanView.objetoSelecionado.procedimentos}">
+														<f:selectItem itemLabel="Select Um" itemValue="" />
+														<f:selectItems
+															value="#{procedimentosBeanView.procedimentos}" />
+													</p:selectOneMenu>
+
+
+
+												</p:row>
+											</p:column>
+											<p:column>
+												<p:row>
+													<h:outputLabel for="obsercavaoProcedimento"
+														value="Observação: " id="labelObservacao" />
+												</p:row>
+											</p:column>
+											<p:column>
+												<p:row>
+													<p:inputText id="obsercavaoProcedimento"
+														styleClass="estilodescricaoCadastro" disabled="false"
+														value="" style="width: 550px;" />
+												</p:row>
+											</p:column>
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="setore.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox  itemLabel="Lingual / Polakal"/></p:row><br/>
+									<p:row><p:selectBooleanCheckbox  itemLabel="Mesial"/></p:row><br/>
+									<p:row><p:selectBooleanCheckbox  itemLabel="Vestibular"/></p:row><br/>
+									<p:row><p:selectBooleanCheckbox  itemLabel="Distal"/></p:row><br/>
+									<p:row><p:selectBooleanCheckbox  itemLabel="Oclusal"/>
+								</p:row>
+							</p:column>
+						<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="raiz.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox  itemLabel="Raiz"/>
+								</p:row>
+							</p:column>
+
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelStatus" for="statusProcedimento"
+								value="Status :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:selectOneMenu id="statusProcedimento"
+								value=""
+								style="width:125px">
+								<f:selectItem itemLabel="Selecione Um" itemValue="" />
+								<f:selectItem itemLabel="Aguardando" itemValue="Aguardando" />
+								<f:selectItem itemLabel="Realizado" itemValue="Realizado" />
+
+							</p:selectOneMenu>
+
+
+						</p:row>
+					</p:column>
+
+											<p:column>
+												<p:row>
+													<div class="espacoBranco" />
+													<div style="horizontal-align: center">
+														<p:commandButton value="Salvar" ajax="false"
+															action="#{odontogramaBeanView.save}" />
+														<p:commandButton value="Novo" ajax="false"
+															immediate="false" action="#{odontogramaBeanView.novo}" />
+													</div>
+												</p:row>
+											</p:column>
+
+
+
+										</p:panelGrid>
+									</p:dialog>
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="21.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="22.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="23.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="24.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="25.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="26.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="27.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="28.PNG" />
+								</p:row>
+							</p:column>
+
+
+
+
+
+
+							<p:column>
+								<p:row>
+
+									<p:selectBooleanCheckbox label="18" id="d18"
+										value="#{dentesView.d18}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="17" id="d17"
+										value="#{dentesView.d17}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="16" id="d16"
+										value="#{dentesView.d16}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="15" id="d15"
+										value="#{dentesView.d15}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="14" id="d14"
+										value="#{dentesView.d14}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="13" id="d13"
+										value="#{dentesView.d13}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="12" id="d12"
+										value="#{dentesView.d12}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="11" id="d11"
+										value="#{dentesView.d11}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="21" id="d21"
+										value="#{dentesView.d21}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="22" id="d22"
+										value="#{dentesView.d22}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="23" id="d23"
+										value="#{dentesView.d23}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="24" id="d24"
+										value="#{dentesView.d24}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="25" id="d25"
+										value="#{dentesView.d25}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="26" id="d26"
+										value="#{dentesView.d26}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="27" id="d27"
+										value="#{dentesView.d27}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="28" id="d28"
+										value="#{dentesView.d28}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+									<p:selectBooleanCheckbox label="48" id="d48"
+										value="#{dentesView.d48}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="47" id="d47"
+										value="#{dentesView.d47}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="46" id="d46"
+										value="#{dentesView.d46}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="45" id="d45"
+										value="#{dentesView.d45}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="44" id="d44"
+										value="#{dentesView.d44}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="43" id="d43"
+										value="#{dentesView.d43}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="42" id="d42"
+										value="#{dentesView.d42}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="41" id="d41"
+										value="#{dentesView.d41}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="31" id="d31"
+										value="#{dentesView.d31}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="32" id="d32"
+										value="#{dentesView.d32}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="33" id="d33"
+										value="#{dentesView.d33}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="34" id="d34"
+										value="#{dentesView.d34}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="35" id="d35"
+										value="#{dentesView.d35}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="36" id="d36"
+										value="#{dentesView.d36}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="37" id="d37"
+										value="#{dentesView.d37}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="38" id="d38"
+										value="#{dentesView.d38}" onchange="PF('dlg2').show();">
+										<p:ajax event="change" update="nomeDente"
+											listener="#{dentesView.escolha}" />
+									</p:selectBooleanCheckbox>
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="48.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="47.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="46.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="45.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="44.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="43.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="42.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="41.PNG" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="31.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="32.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="33.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="34.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="35.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="36.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="37.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="38.PNG" />
+								</p:row>
+							</p:column>
+
+
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab title="Arcada Infantil">
+						<h:panelGrid id="gridCrianca" columns="11"
+							style="text-align: center;">
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="55.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="54.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="53.png" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="52.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="51.png" />
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="61.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="62.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="63.png" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="64.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="65.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+
+									<p:selectBooleanCheckbox label="55" id="d55" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="54" id="d54" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="53" id="d53" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="52" id="d52" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="51" id="d51" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="61" id="d61" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="62" id="d62" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="63" id="d63" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="64" id="d64" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="65" id="d65" />
+								</p:row>
+							</p:column>
+
+
+
+
+							<p:column>
+								<p:row>
+
+									<p:selectBooleanCheckbox label="85" id="d85" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="84" id="d84" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="83" id="d83" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="82" id="d82" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="81" id="d81" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="71" id="d71" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="72" id="d72" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="73" id="d73" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="74" id="d74" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="75" id="d75" />
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="85.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="84.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="83.png" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="82.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="81.png" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="71.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="72.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="73.png" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="74.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="75.png" />
+								</p:row>
+							</p:column>
+
+
+
+
+						</h:panelGrid>
+					</p:tab>
+
+				</p:accordionPanel>
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+
+
+
+</ui:composition>
+
+
+</html>

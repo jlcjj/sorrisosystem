@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+
+		
+		<h:form id="formCadastro" prependId="false">
+			<c:set var="isCadastro" value="true" scope="view" />
+			<p:panel header="Cadastro de Procedimentos" id="panelCadastro">
+				<h:panelGrid id="gridAcessos" columns="3">
+					<p:column>
+						<p:row>
+							<h:outputLabel for="codigo_interno" value="codigo: " id="labelId" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<p:inputText id="codigo_interno" required="true"
+								styleClass="estiloCodigoCadastro" disabled="false"
+								equiredMessage="Informe o codigo"
+								value="#{procedimentosBeanView.objetoSelecionado.codigo_interno}" />
+						</p:row>
+					</p:column>
+
+					<p:column>
+						<p:row>
+							<p:message for="codigo_interno" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labeldescricao" for="descricao"
+								value="Descrição :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+							<p:inputText id="descricao" styleClass="estilodescricaoCadastro"
+								disabled="false"
+								value="#{procedimentosBeanView.objetoSelecionado.descricao}"
+								style="width: 550px;" />
+
+
+
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+					<p:column>
+						<p:row>
+							<h:outputLabel id="labelValor" for="valor_procedimento"
+								value="Valor :" />
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+							<p:inputText id="valor_procedimento"
+								styleClass="estiloValorCadastro" disabled="false"
+								value="#{procedimentosBeanView.objetoSelecionado.valor_procedimento}">
+								<f:convertNumber minFractionDigits="4" maxFractionDigits="4"
+									type="number" currencyCode="BRL" groupingUsed="true"
+									locale="pt_BR" />
+							</p:inputText>
+						</p:row>
+					</p:column>
+					<p:column>
+						<p:row>
+
+						</p:row>
+					</p:column>
+
+
+
+				</h:panelGrid>
+
+
+			</p:panel>
+
+			<div class="espacoBranco" />
+
+			<util:botoesCrud managedBeanView="#{procedimentosBeanView}"
+				camposReload=":formTemplate:msg, tableResult"
+				botaoNovo="#{contextoBean.possuiAcesso('PROCEDIMENTOS_NOVO','ADMIN')}"
+				botaoSalvar="#{contextoBean.possuiAcesso('PROCEDIMENTOS_NOVO','ADMIN') and procedimentosBeanView.objetoSelecionado.procedimento_id == null}"
+				botaoAtualizar="#{contextoBean.possuiAcesso('PROCEDIMENTOS_EDITAR', 'ADMIN') and procedimentosBeanView.objetoSelecionado.procedimento_id != null}"
+				botaoExcluir="#{contextoBean.possuiAcesso('PROCEDIMENTOS_EXCLUIR', 'ADMIN')}" />
+
+
+		</h:form>
+		<script type="text/javascript" charset="UTF-8">
+			addFocoCampo("codigo_interno");
+			gerenciaTeclaEnter();
+			addMascaraDecimalMonetaria('valor_procedimento');
+		</script>
+		<div class="espacoBranco" />
+
+		<p:dataTable id="tableResult" value="#{procedimentosBeanView.list.list}"
+			var="objeto" emptyMessage="Não existem valores a serem exibidos!"
+			rows="10" paginatorPosition="bottom" paginator="true"
+			rendered="#{procedimentosBeanView.list.list.size() > 0}"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} 
+								{PageLinks} {NextPageLink} {LastPageLink}
+								{RowsPerPageDropdown}">
+			<ui:include
+				src="/resources/components/colunasDataTableProcedimentos.xhtml"></ui:include>
+		</p:dataTable>
+
+
+	</ui:define>
+</ui:composition>
+
+
+</html>

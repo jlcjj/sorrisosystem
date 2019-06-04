@@ -1,0 +1,46 @@
+CREATE TABLE `entidade` (
+  `ent_codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `ent_login` varchar(20) DEFAULT NULL,
+  `ent_senha` varchar(45) DEFAULT NULL,
+  `ent_nome` varchar(45) DEFAULT NULL,
+  `ent_inativo` tinyint(1) DEFAULT NULL,
+  `ent_ultimoacesso` datetime DEFAULT NULL,
+  PRIMARY KEY (`ent_codigo`),
+  UNIQUE KEY `ent_login_UNIQUE` (`ent_login`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `entidadeacesso` (
+  `ent_codigo` int(11) NOT NULL,
+  `esa_codigo` varchar(70) DEFAULT NULL,
+  KEY `ent_codigo_fkey_idx` (`ent_codigo`),
+  CONSTRAINT `ent_codigo_fkey` FOREIGN KEY (`ent_codigo`) REFERENCES `entidade` (`ent_codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `sorrisosystem`.`entidade`
+(`ent_codigo`,
+`ent_login`,
+`ent_senha`,
+`ent_nome`,
+`ent_inativo`)
+VALUES
+(1,
+"JLCJJ",
+"123456",
+"JOHNNY LUIZ CRISTOVAN",
+0);
+
+INSERT INTO `sorrisosystem`.`entidadeacesso`
+(`ent_codigo`,
+`esa_codigo`)
+VALUES
+(1,
+"ADMIN");
+
+INSERT INTO `sorrisosystem`.`entidadeacesso`
+(`ent_codigo`,
+`esa_codigo`)
+VALUES
+(1,
+"USER");

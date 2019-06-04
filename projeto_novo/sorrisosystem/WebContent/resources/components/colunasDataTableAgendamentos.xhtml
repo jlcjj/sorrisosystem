@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+			<p:column style="width:100px">
+				<center>
+					<f:facet name="header">Código</f:facet>
+					<h:outputText value="#{objeto.agendamento_id}"></h:outputText>
+				</center>
+			</p:column>
+
+			<p:column style="width:650px">
+				<center>
+					<f:facet name="header">Paciente</f:facet>
+					<h:outputText value="#{objeto.clientes.nome}"></h:outputText>
+				</center>
+			</p:column>
+
+			<p:column style="width:150px">
+				<center>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{objeto.data_agendamento}"></h:outputText>
+				</center>
+			</p:column>
+
+			<p:column style="width:150px">
+				<center>
+					<f:facet name="header">Hora</f:facet>
+					<h:outputText value="#{objeto.horario_agendamento}"></h:outputText>
+				</center>
+			</p:column>
+
+			<p:column>
+				<center>
+					<f:facet name="header">Médico</f:facet>
+					<h:outputText value="#{objeto.nomeMedico}"></h:outputText>
+				</center>
+			</p:column>
+			<p:column>
+				<center>
+					<f:facet name="header">Situação</f:facet>
+					<h:outputText value="#{objeto.status}"></h:outputText>
+				</center>
+			</p:column>
+			<sec:ifAnyGranted roles="AGENDAMENTOS_EDITAR, ADMIN">
+				<p:column style="width:50px">
+					<center>
+						<f:facet name="header">Editar</f:facet>
+						<p:commandLink action="#{agendamentosBeanView.editar}"
+							update="formCadastro" id="editarAgendamentos" ajax="false"
+							immediate="true">
+							<h:graphicImage value="/resources/img/editar16.png" />
+							<f:setPropertyActionListener value="#{objeto}"
+								target="#{agendamentosBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+						</p:commandLink>
+					</center>
+				</p:column>
+			</sec:ifAnyGranted>
+			<sec:ifAnyGranted roles="AGENDAMENTOS_EXCLUIR, ADMIN">
+				<p:column style="width:50px">
+					<center>
+						<f:facet name="header">Excluir</f:facet>
+						<p:commandLink action="#{agendamentosBeanView.excluir}"
+							update="tableResult" id="excluirAgendamentos" ajax="false"
+							immediate="true"
+							onclick="if(!confirm('Confirma a exclusão?')) return false;">
+							<h:graphicImage value="/resources/img/excluir16.png" />
+							<f:setPropertyActionListener value="#{objeto}"
+								target="#{agendamentosBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+						</p:commandLink>
+					</center>
+				</p:column>
+			</sec:ifAnyGranted>
+
+</html>

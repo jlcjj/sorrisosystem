@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+
+
+<p:column style="width:100px">
+	<center>
+		<f:facet name="header">Código</f:facet>
+		<h:outputText value="#{objeto.avaliacao_id}"></h:outputText>
+	</center>
+</p:column>
+
+<p:column style="width:650px">
+	<center>
+		<f:facet name="header">Paciente</f:facet>
+		<h:outputText value="#{objeto.clientes.nome}"></h:outputText>
+	</center>
+</p:column>
+
+<p:column style="width:150px">
+	<center>
+		<f:facet name="header">Data</f:facet>
+		<h:outputText value="#{objeto.data_avaliacao}"></h:outputText>
+	</center>
+</p:column>
+
+
+
+<p:column>
+	<center>
+		<f:facet name="header">Tipo</f:facet>
+		<h:outputText value="#{objeto.tipoAval}"></h:outputText>
+	</center>
+</p:column>
+<sec:ifAnyGranted roles="AVALIACAO_ASSUMIR, ADMIN">
+	<p:column style="width:50px">
+		<center>
+			<f:facet name="header">Assumir</f:facet>
+			<p:commandLink action="PF('dlg2').show();"id="assumirAvaliacao" ajax="false"
+				immediate="false">
+				<h:graphicImage value="/resources/img/assumir.png" />
+				<f:setPropertyActionListener value="#{objeto}"
+					target="#{avaliacaoBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+			</p:commandLink>
+		</center>
+	</p:column>
+</sec:ifAnyGranted>
+<sec:ifAnyGranted roles="AVALIACAO_EDITAR, ADMIN">
+	<p:column style="width:50px">
+		<center>
+			<f:facet name="header">Editar</f:facet>
+			<p:commandLink action="#{avaliacaoBeanView.editar}"
+				update="formCadastro" id="editarAvaliacao" ajax="false"
+				immediate="false">
+				<h:graphicImage value="/resources/img/editar16.png" />
+				<f:setPropertyActionListener value="#{objeto}"
+					target="#{avaliacaoBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+			</p:commandLink>
+		</center>
+	</p:column>
+</sec:ifAnyGranted>
+<sec:ifAnyGranted roles="AVALIACAO_EXCLUIR, ADMIN">
+	<p:column style="width:50px">
+		<center>
+			<f:facet name="header">Excluir</f:facet>
+			<p:commandLink action="#{avaliacaoBeanView.excluir}"
+				update="tableResult" id="excluirAvaliacao" ajax="true"
+				immediate="true"
+				onclick="if(!confirm('Confirma a exclusão?')) return false;">
+				<h:graphicImage value="/resources/img/excluir16.png" />
+				<f:setPropertyActionListener value="#{objeto}"
+					target="#{avaliacaoBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+			</p:commandLink>
+		</center>
+	</p:column>
+</sec:ifAnyGranted>
+
+<p:dialog header="Senha." widgetVar="dlg2" modal="true" height="500">
+	
+</p:dialog>
+
+</html>

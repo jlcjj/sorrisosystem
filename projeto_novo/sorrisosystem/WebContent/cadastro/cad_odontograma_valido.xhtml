@@ -1,0 +1,870 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+		<h:form id="formCadastro" prependId="false">
+			<c:set var="isCadastro" value="true" scope="view" />
+			<p:panel header="Cadastro de Avaliações" id="panelCadastro">
+
+				<h:panelGrid id="gridSelecao" columns="2" style="margin-bottom:10px"
+					cellpadding="5">
+
+					<p:selectOneMenu id="titular" value="#{listenerView.tipo}"
+						style="width:125px">
+						<f:selectItem itemLabel="Selecione Um" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Adulto" itemValue="Adulto" />
+						<f:selectItem itemLabel="Criança" itemValue="Crianca" />
+						<f:selectItem itemLabel="Misto" itemValue="Misto" />
+						<p:ajax listener="#{listenerView.visivel}" event="change" />
+					</p:selectOneMenu>
+
+
+
+				</h:panelGrid>
+				<p:accordionPanel>
+					<p:tab title="Arcada Adulta">
+						<h:panelGrid id="gridAdulto" columns="19"
+							style="text-align: center;">
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="18.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="17.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="16.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="15.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="14.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="13.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="12.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="11.PNG" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="21.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="22.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="23.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="24.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="25.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="26.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="27.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="28.PNG" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+									                                                                  .
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:panelGrid columns="2" style="text-align: left;">
+									<p:column>
+										<p:row>
+											<h:outputLabel for="nomeDente" value="Descrição: "
+												id="labelNomeDente" />
+										</p:row>
+									</p:column>
+									<p:column>
+										<p:row>
+											<p:inputText id="nomeDente" styleClass="estiloIdCadastro"
+												disabled="true"
+												value="28 - Terceiro molar superior esquerdo"
+												style="width: 550px;" />
+										</p:row>
+									</p:column>
+									<p:column>
+										<p:row>
+											<h:outputLabel for="nomeProcedimento" value="Procedimento "
+												id="labelProcedimento" />
+										</p:row>
+									</p:column>
+									<p:column>
+										<p:row>
+											<p:inputText id="nomeProcedimento"
+												styleClass="estilodescricaoCadastro" disabled="false"
+												value="" style="width: 550px;" />
+										</p:row>
+									</p:column>
+									<p:column>
+										<p:row>
+											<h:outputLabel for="obsercavaoProcedimento"
+												value="Observação: " id="labelObservacao" />
+										</p:row>
+									</p:column>
+									<p:column>
+										<p:row>
+											<p:inputText id="obsercavaoProcedimento"
+												styleClass="estilodescricaoCadastro" disabled="false"
+												value="" style="width: 550px;" />
+										</p:row>
+									</p:column>
+
+
+									<p:column>
+										<p:row>
+											<h:outputLabel for="statusProcedimento" value="Observação: "
+												id="labelStatus" />
+										</p:row>
+									</p:column>
+									<p:column>
+										<p:row>
+											<p:inputText id="statusProcedimento"
+												styleClass="estilodescricaoCadastro" disabled="false"
+												value="" style="width: 100px;" />
+										</p:row>
+									</p:column>
+
+
+									<p:column>
+										<p:row>
+											<div class="espacoBranco" />
+											<div style="horizontal-align: center">
+												<p:commandButton value="Salvar" ajax="false"
+													action="#{odontogramaBeanView.save}" />
+												<p:commandButton value="Novo" ajax="false" immediate="false"
+													action="#{odontogramaBeanView.novo}" />
+											</div>
+										</p:row>
+									</p:column>
+
+
+
+								</p:panelGrid>
+							</p:column>
+
+
+							
+
+								<p:column>
+									<p:row>
+
+										<p:selectBooleanCheckbox label="18" id="d18" >
+											<p:ajax  />
+										</p:selectBooleanCheckbox>
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="17" id="d17" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="16" id="d16" />
+									</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="15" id="d15" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="14" id="d14" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="13" id="d13" />
+									</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="12" id="d12" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="11" id="d11" />
+									</p:row>
+								</p:column>
+
+
+								<p:column>
+									<p:row>
+
+									</p:row>
+								</p:column>
+
+
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="21" id="d21" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="22" id="d22" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="23" id="d23" />
+									</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="24" id="d24" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="25" id="d25" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="26" id="d26" />
+									</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="27" id="d27" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="28" id="d28" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+									|
+								</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+									|
+								</p:row>
+								</p:column>
+
+
+								<p:column>
+									<p:row>
+
+										<p:selectBooleanCheckbox label="48" id="d48" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="47" id="d47" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="46" id="d46" />
+									</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="45" id="d45" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="44" id="d44" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="43" id="d43" />
+									</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="42" id="d42" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="41" id="d41" />
+									</p:row>
+								</p:column>
+
+
+								<p:column>
+									<p:row>
+
+									</p:row>
+								</p:column>
+
+
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="31" id="d31" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="32" id="d32" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="33" id="d33" />
+									</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="34" id="d34" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="35" id="d35" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="36" id="d36" />
+									</p:row>
+								</p:column>
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="37" id="d37" />
+									</p:row>
+								</p:column>
+
+								<p:column>
+									<p:row>
+										<p:selectBooleanCheckbox label="38" id="d38" />
+									</p:row>
+								</p:column>
+
+
+							<p:column>
+								<p:row>
+									|
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									|
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="48.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="47.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="46.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="45.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="44.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="43.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="42.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="41.PNG" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="31.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="32.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="33.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="34.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="35.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="36.PNG" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="37.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="38.PNG" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									|
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									|
+								</p:row>
+							</p:column>
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab title="Arcada Infantil">
+						<h:panelGrid id="gridCrianca" columns="11"
+							style="text-align: center;">
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="55.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="54.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="53.png" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="52.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="51.png" />
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="61.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="62.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="63.png" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="64.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="65.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+
+									<p:selectBooleanCheckbox label="55" id="d55" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="54" id="d54" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="53" id="d53" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="52" id="d52" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="51" id="d51" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="61" id="d61" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="62" id="d62" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="63" id="d63" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="64" id="d64" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="65" id="d65" />
+								</p:row>
+							</p:column>
+
+
+
+
+							<p:column>
+								<p:row>
+
+									<p:selectBooleanCheckbox label="85" id="d85" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="84" id="d84" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="83" id="d83" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="82" id="d82" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="81" id="d81" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="71" id="d71" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="72" id="d72" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="73" id="d73" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="74" id="d74" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<p:selectBooleanCheckbox label="75" id="d75" />
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="85.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="84.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="83.png" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="82.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="81.png" />
+								</p:row>
+							</p:column>
+
+
+							<p:column>
+								<p:row>
+
+								</p:row>
+							</p:column>
+
+
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="71.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="72.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="73.png" />
+								</p:row>
+							</p:column>
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="74.png" />
+								</p:row>
+							</p:column>
+
+							<p:column>
+								<p:row>
+									<h:graphicImage library="img/dentes/" name="75.png" />
+								</p:row>
+							</p:column>
+
+
+
+
+						</h:panelGrid>
+					</p:tab>
+
+				</p:accordionPanel>
+
+
+
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+
+
+
+</ui:composition>
+
+
+</html>

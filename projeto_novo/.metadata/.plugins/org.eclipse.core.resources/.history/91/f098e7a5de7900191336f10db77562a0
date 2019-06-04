@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="true">
+	<Resource	
+				name="jdbc/datasource" 
+				auth="Container" 
+				type="javax.sql.DataSource"
+				defaultAutoCommit='false'
+				maxActive="100"
+				maxIdle="30" 
+				maxWait="10000"
+				initialSize="10"
+				driverClassName="com.mysql.jdbc.Driver"
+				validationQuery="SELECT 'OK'"
+				testWhileIdle="true"
+           		testOnBorrow="true"
+           		numTestsPerEvictionRun="5"
+                timeBetweenEvictionRunsMillis="5000"
+                minEvictableIdleTimeMillis="60000"
+				antiJARLocking="false"
+                antiResourceLocking="false"
+				url='jdbc:mysql://localhost:3306/sorrisosystem?autoReconnect=true'
+				username="mastersorriso" 
+				password="j@4nny" />
+			
+<!-- Classe do tomcat que está lendo esse arquivo é org.apache.tomcat.dbcp.dbcp.PoolingDataSource -->				
+<!-- POOL DE CONEXÕES -->
+<!-- https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html -->
+</Context>
