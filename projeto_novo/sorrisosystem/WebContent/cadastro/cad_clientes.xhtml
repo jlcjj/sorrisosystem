@@ -17,7 +17,8 @@
 				<h:panelGrid id="gridClientes" columns="3">
 					<p:column>
 						<p:row>
-							<h:outputLabel for="id" value="codigo: " id="labelId" rendered="false"/>
+							<h:outputLabel for="id" value="codigo: " id="labelId"
+								rendered="false" />
 						</p:row>
 					</p:column>
 
@@ -25,7 +26,8 @@
 						<p:row>
 							<p:inputText id="id" styleClass="estiloIdCadastro"
 								disabled="true"
-								value="#{clientesBeanView.objetoSelecionado.cliente_id}" rendered="false"/>
+								value="#{clientesBeanView.objetoSelecionado.cliente_id}"
+								rendered="false" />
 						</p:row>
 					</p:column>
 
@@ -108,8 +110,7 @@
 					<p:column>
 						<p:row>
 							<p:inputText id="rg" styleClass="estyleInputRg"
-								value="#{clientesBeanView.objetoSelecionado.rg}"
-								 maxlength="15" />
+								value="#{clientesBeanView.objetoSelecionado.rg}" maxlength="15" />
 						</p:row>
 					</p:column>
 					<p:column>
@@ -130,7 +131,9 @@
 
 							<p:inputMask mask="999.999.999-99"
 								value="#{clientesBeanView.objetoSelecionado.cpf}" id="cpf"
-								styleClass="estyleInputCpf" maxlength="11" />
+								styleClass="estyleInputCpf" maxlength="11" 
+								onblur="valida_cpf(this.value);" />
+								
 
 						</p:row>
 					</p:column>
@@ -154,8 +157,7 @@
 
 							<p:inputText
 								value="#{clientesBeanView.objetoSelecionado.endereco}"
-								 id="endereco" style="width: 550px;"
-								maxlength="100" />
+								id="endereco" style="width: 550px;" maxlength="100" />
 
 						</p:row>
 					</p:column>
@@ -176,8 +178,7 @@
 						<p:row>
 
 							<p:inputText value="#{clientesBeanView.objetoSelecionado.numero}"
-								 id="numero" styleClass="estyleInputNumero"
-								maxlength="100" />
+								id="numero" styleClass="estyleInputNumero" maxlength="100" />
 
 						</p:row>
 					</p:column>
@@ -198,8 +199,7 @@
 
 							<p:inputText
 								value="#{clientesBeanView.objetoSelecionado.complemento}"
-								 id="complemento" style="width: 350px;"
-								maxlength="100" />
+								id="complemento" style="width: 350px;" maxlength="100" />
 
 						</p:row>
 					</p:column>
@@ -220,8 +220,7 @@
 						<p:row>
 
 							<p:inputText value="#{clientesBeanView.objetoSelecionado.bairro}"
-								 id="bairro" style="width: 350px;"
-								maxlength="100" />
+								id="bairro" style="width: 350px;" maxlength="100" />
 
 						</p:row>
 					</p:column>
@@ -240,9 +239,9 @@
 					<p:column>
 						<p:row>
 
-							<p:inputMask mask="99.999-999"
-								value="#{clientesBeanView.objetoSelecionado.cep}"
-								 id="cep" style="width: 100px;" maxlength="100"
+							<p:inputMask mask="99999-999"
+								value="#{clientesBeanView.objetoSelecionado.cep}" id="cep"
+								style="width: 100px;" maxlength="100"
 								onblur="pesquisacep(this.value);" />
 
 						</p:row>
@@ -263,16 +262,15 @@
 						<p:row>
 
 							<p:inputText value="#{clientesBeanView.objetoSelecionado.cidade}"
-								 id="cidade" style="width: 400px;"
-								maxlength="100" />
+								id="cidade" style="width: 400px;" maxlength="100" />
 
 						</p:row>
 					</p:column>
 					<p:column>
 						<p:row>
 									UF : <p:inputText
-								value="#{clientesBeanView.objetoSelecionado.UF}"
-								 id="UF" style="width: 50px;" maxlength="2" />
+								value="#{clientesBeanView.objetoSelecionado.UF}" id="UF"
+								style="width: 50px;" maxlength="2" />
 
 						</p:row>
 					</p:column>
@@ -289,8 +287,7 @@
 
 							<p:inputMask mask="(99)9999-9999"
 								value="#{clientesBeanView.objetoSelecionado.tel_fixo}"
-								 id="tel_fixo" style="width: 150px;"
-								maxlength="20" />
+								id="tel_fixo" style="width: 150px;" maxlength="20" />
 
 						</p:row>
 					</p:column>
@@ -312,8 +309,7 @@
 
 							<p:inputMask mask="(99)9 9999-9999"
 								value="#{clientesBeanView.objetoSelecionado.tel_celular}"
-								 id="tel_celular" style="width: 150px;"
-								maxlength="20" />
+								id="tel_celular" style="width: 150px;" maxlength="20" />
 
 						</p:row>
 					</p:column>
@@ -407,8 +403,7 @@
 
 								<p:inputText
 									value="#{clientesBeanView.objetoSelecionado.nome_Convenio}"
-									 id="nome_Convenio" style="width: 450px;"
-									maxlength="20" />
+									id="nome_Convenio" style="width: 450px;" maxlength="20" />
 
 							</p:row>
 						</p:column>
@@ -429,8 +424,7 @@
 							<p:row>
 
 								<p:inputText value="#{clientesBeanView.objetoSelecionado.plano}"
-									id="plano" style="width: 450px;"
-									maxlength="20" />
+									id="plano" style="width: 450px;" maxlength="20" />
 
 							</p:row>
 						</p:column>
@@ -452,8 +446,7 @@
 
 								<p:inputText
 									value="#{clientesBeanView.objetoSelecionado.num_cart_convenio}"
-									id="numCart" style="width: 150px;"
-									maxlength="20" />
+									id="numCart" style="width: 150px;" maxlength="20" />
 
 							</p:row>
 						</p:column>
@@ -510,8 +503,7 @@
 
 								<p:inputText
 									value="#{clientesBeanView.objetoSelecionado.nome_sindicato}"
-									id="nome_sindicato" style="width: 450px;"
-									maxlength="20" />
+									id="nome_sindicato" style="width: 450px;" maxlength="20" />
 
 							</p:row>
 						</p:column>
@@ -533,8 +525,7 @@
 
 								<p:inputText
 									value="#{clientesBeanView.objetoSelecionado.num_cart_sindicato}"
-									id="num_cart_sindicato" style="width: 150px;"
-									maxlength="20" />
+									id="num_cart_sindicato" style="width: 150px;" maxlength="20" />
 
 							</p:row>
 						</p:column>
@@ -566,8 +557,7 @@
 
 							<p:inputText
 								value="#{clientesBeanView.objetoSelecionado.observacao}"
-								id="observacao" style="width: 750px;"
-								maxlength="400" />
+								id="observacao" style="width: 750px;" maxlength="400" />
 
 						</p:row>
 					</p:column>
@@ -612,9 +602,9 @@
 
 
 			</p:panel>
-			
-			
-			
+
+
+
 			<div class="espacoBranco" />
 
 			<util:botoesCrud managedBeanView="#{clientesBeanView}"
@@ -623,10 +613,122 @@
 				botaoSalvar="#{contextoBean.possuiAcesso('CLIENTES_NOVO','ADMIN') and clientesBeanView.objetoSelecionado.cliente_id == null}"
 				botaoAtualizar="#{contextoBean.possuiAcesso('CLIENTES_EDITAR', 'ADMIN') and clientesBeanView.objetoSelecionado.cliente_id != null}"
 				botaoExcluir="#{contextoBean.possuiAcesso('CLIENTES_EXCLUIR', 'ADMIN')}" />
-			
-			
-			
+
+
+
 		</h:form>
+
+		<script type="text/javascript">
+			function limpa_formulário_cep() {
+				document.getElementById('endereco').value = ("");
+				document.getElementById('bairro').value = ("");
+				document.getElementById('cidade').value = ("");
+				document.getElementById('UF').value = ("");
+			}
+
+			function meu_callback(conteudo) {
+				if (!("erro" in conteudo)) {
+					document.getElementById('endereco').value = (conteudo.logradouro);
+					document.getElementById('bairro').value = (conteudo.bairro);
+					document.getElementById('cidade').value = (conteudo.localidade);
+					document.getElementById('UF').value = (conteudo.uf);
+				} else {
+					limpa_formulário_cep();
+					alert("CEP não encontrado.");
+				}
+			}
+
+			function pesquisacep(valor) {
+				var cep = valor.replace(/\D/g, '');
+				cep = cep.replace('.','');
+				cep = cep.replace('-','');
+				cep = cep.replace('.','');
+				if (cep != "") {
+					var validacep = /^[0-9]{8}$/;
+					if (validacep.test(cep)) {
+						document.getElementById('endereco').value = "...";
+						document.getElementById('bairro').value = "...";
+						document.getElementById('cidade').value = "...";
+						document.getElementById('UF').value = "...";
+						var script = document.createElement('script');
+
+						script.src = 'https://viacep.com.br/ws/' + cep
+								+ '/json/?callback=meu_callback';
+
+						document.body.appendChild(script);
+					} else {
+						limpa_formulário_cep();
+						alert("Formato de CEP inválido.");
+					}
+				} else {
+					limpa_formulário_cep();
+				}
+			};
+		</script>
+
+		<script type="text/javascript">
+		function valida_cpf(cpf)
+		{	//<![CDATA[
+
+			cpf = cpf.replace('.','');
+			  cpf = cpf.replace('-','');
+			  cpf = cpf.replace('.','');
+
+			  var numeros, digitos, soma, i, resultado, digitos_iguais;
+			  digitos_iguais = 1;
+			  if (cpf.length < 11)
+			        return false;
+			  for (i = 0; i < cpf.length - 1; i++)
+			        if (cpf.charAt(i) != cpf.charAt(i + 1))
+			              {
+			              digitos_iguais = 0;
+			              break;
+			              }
+			  if (!digitos_iguais)
+			        {
+			        numeros = cpf.substring(0,9);
+			        digitos = cpf.substring(9);
+			        soma = 0;
+			        for (i = 10; i > 1; i--)
+			              soma += numeros.charAt(10 - i) * i;
+			        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+			        if (resultado != digitos.charAt(0)){
+						  alert("CPF inválido.");
+						 	 document.getElementById('cpf').value = ("");
+			              return false;
+			        }
+			        numeros = cpf.substring(0,10);
+			        soma = 0;
+			        for (i = 11; i > 1; i--)
+			              soma += numeros.charAt(11 - i) * i;
+			        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+			        if (resultado != digitos.charAt(1)){
+						  alert("CPF inválido.");
+						 	 document.getElementById('cpf').value = ("");
+			              return false;
+			        }
+			        return true;
+			        
+			        }
+			  else
+				  alert("CPF inválido.");
+			 	 document.getElementById('cpf').value = ("");
+			        return false;
+			      
+			//]]>
+		}
+			  $j(document).ready(function () {
+
+			        $j("#meuForm").validate({
+			            rules: {
+			                NrCpf: {NrCpf: true, required: true}
+			            },
+			            messages: {
+			                NrCpf: {NrCpf: alert('CPF Inválido')}
+			            }
+			        });
+			    });
+		</script>
 
 
 		<script type="text/javascript" charset="UTF-8">
@@ -642,8 +744,9 @@
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} 
 								{PageLinks} {NextPageLink} {LastPageLink}
 								{RowsPerPageDropdown}">
-			
-				<ui:include src="/resources/components/colunasDataTableClientes.xhtml"></ui:include>
+
+			<ui:include
+				src="/resources/components/colunasDataTableClientes.xhtml"></ui:include>
 
 
 
@@ -658,4 +761,4 @@
 </ui:composition>
 
 
-</html> 	
+</html>
