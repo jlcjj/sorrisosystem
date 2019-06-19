@@ -44,3 +44,21 @@ INSERT INTO `sorrisosystem`.`entidadeacesso`
 VALUES
 (1,
 "USER");
+
+
+
+DELIMITER $
+ 
+CREATE  TRIGGER Tgr_Avaliacao_Insert AFTER update
+ON avaliacao
+FOR EACH ROW
+BEGIN
+	if (new.status = 'Assumido') then
+		insert into atendimento (status, clientes, entidade) values ("Novo", new.clientes, new.entidade);
+	end if;
+   
+END$
+ 
+
+ 
+DELIMITER ;
