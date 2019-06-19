@@ -32,21 +32,46 @@
 		<h:outputText value="#{objeto.data_avaliacao}"></h:outputText>
 	</center>
 </p:column>
+<p:column style="width:150px">
+	<center>
+		<f:facet name="header">Hora Chegada</f:facet>
+		<h:outputText value="#{objeto.horario_agendamento}"></h:outputText>
+	</center>
+</p:column>
+<p:column style="width:150px">
+	<center>
+		<f:facet name="header">Status</f:facet>
+		<h:outputText value="#{objeto.status}"></h:outputText>
+	</center>
+</p:column>
 
-
-
-<p:column>
+<p:column style="width:100px">
 	<center>
 		<f:facet name="header">Tipo</f:facet>
 		<h:outputText value="#{objeto.tipoAval}"></h:outputText>
 	</center>
 </p:column>
-<sec:ifAnyGranted roles="AVALIACAO_ASSUMIR, ADMIN">
+<sec:ifAnyGranted roles="AVALIACAO_CHEGADA, ADMIN">
+	<p:column style="width:50px">
+		<center>
+			<f:facet name="header">Chegou</f:facet>
+			<p:commandLink action="#{avaliacaoBeanView.saveNotReturnHorario}" 
+				update="formCadastro" id="chegouAvaliacao" ajax="false"
+				immediate="false">
+				<h:graphicImage value="/resources/img/hora.png" />
+				<f:setPropertyActionListener value="#{objeto}"
+					target="#{avaliacaoBeanView.objetoSelecionado}"></f:setPropertyActionListener>
+			</p:commandLink>
+		</center>
+	</p:column>
+</sec:ifAnyGranted>
+<sec:ifAnyGranted roles="AVALIACAO_AVALIADOR">
 	<p:column style="width:50px">
 		<center>
 			<f:facet name="header">Assumir</f:facet>
-			<p:commandLink action="PF('dlg2').show();"id="assumirAvaliacao" ajax="false"
-				immediate="false">
+			<p:commandLink action="#{avaliacaoBeanView.saveNotReturnAssumir}" 
+				update="formCadastro" id="assumirAvaliacao" ajax="false"
+				immediate="false" >
 				<h:graphicImage value="/resources/img/assumir.png" />
 				<f:setPropertyActionListener value="#{objeto}"
 					target="#{avaliacaoBeanView.objetoSelecionado}"></f:setPropertyActionListener>
