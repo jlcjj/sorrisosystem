@@ -116,6 +116,15 @@ public class EntidadeBeanView extends BeanManagedViewAbstract{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+
+	@Override
+	public void saveNotReturnHorario() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

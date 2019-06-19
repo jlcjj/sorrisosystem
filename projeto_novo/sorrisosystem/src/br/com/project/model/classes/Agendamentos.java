@@ -61,7 +61,7 @@ public class Agendamentos implements Serializable{
 	@Column(nullable = false, length = 20)
 	private String horario_realizado;
 			
-	
+	@IdentificaCampoPesquisa(descricaoCampo = "Status", campoConsulta = "status")
 	@Column(nullable = false, length = 20)
 	private String status;
 	

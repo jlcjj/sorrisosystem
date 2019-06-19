@@ -6,23 +6,26 @@ import java.util.Date;
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.core.SqlReturnResultSet;
+import org.springframework.jdbc.core.SqlRowSetResultSetExtractor;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Controller;
 
 import br.com.framework.interfac.crud.InterfaceCrud;
 import br.com.project.bean.geral.BeanManagedViewAbstract;
-import br.com.project.bean.geral.ObjetoCampoConsulta;
 import br.com.project.carregamento.lazy.CarregamentoLazyListForObject;
-import br.com.project.enums.CondicaoPesquisa;
+import br.com.project.geral.controller.AtendimentoController;
 import br.com.project.geral.controller.AvaliacaoController;
-import br.com.project.geral.controller.SessionController;
+import br.com.project.model.classes.Atendimento;
 import br.com.project.model.classes.Avaliacao;
+import br.com.project.model.classes.Entidade;
 import br.com.project.util.all.UtilitariaRegex;
-import br.com.srv.interfaces.SrvAvaliacao;
 import br.com.srv.interfaces.SrvLogin;
 
 @Controller
@@ -49,6 +52,7 @@ public class AvaliacaoBeanView extends BeanManagedViewAbstract {
 	private String username;
 	private String password;
 	
+	private Boolean permissao = false;
 	
 	@Resource
 	private SrvLogin srvLogin;
@@ -56,11 +60,13 @@ public class AvaliacaoBeanView extends BeanManagedViewAbstract {
 	
 	
 	private Avaliacao objetoSelecionado = new Avaliacao();
+	private Atendimento objetoSelecionadoAv = new Atendimento();
 	
 	private CarregamentoLazyListForObject<Avaliacao> list = new CarregamentoLazyListForObject<Avaliacao>();
 	//private List<Avaliacao> list = new ArrayList<Avaliacao>();
 	
 	
+
 	
 	public CarregamentoLazyListForObject<Avaliacao> getList() throws Exception {
 		//list = avaliacaoController.findList(getClassImplement());
@@ -100,12 +106,54 @@ public class AvaliacaoBeanView extends BeanManagedViewAbstract {
 	@Override
 	public void saveNotReturn() throws Exception {
 		list.clean();
+		long teste = 0;
+		teste = verificaUsuarioCod();
+		objetoSelecionado.getEntidade().setEnt_codigo((long) verificaUsuarioCod());
 		objetoSelecionado = avaliacaoController.merge(objetoSelecionado);
 		list.add(objetoSelecionado);
 		objetoSelecionado = new Avaliacao();
 		sucesso();
 	}
+	
+	@Override
+	public void saveNotReturnHorario() throws Exception {
+		list.clean();
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");  
+		String horaFormatada = formatter.format(date);
+		objetoSelecionado = avaliacaoController.merge(objetoSelecionado);
+	objetoSelecionado.setHorario_agendamento(horaFormatada);
+	objetoSelecionado.setStatus("Aguardando");
+		list.add(objetoSelecionado);
+		objetoSelecionado = new Avaliacao();
 		
+		sucesso();
+	}
+
+	public void saveNotReturnAssumir() throws Exception {
+		FacesMessage message = null;
+		if (objetoSelecionado.getStatus().equals("Aguardando")) {
+			
+	
+		list.clean();
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");  
+		String horaFormatada = formatter.format(date);
+		objetoSelecionado = avaliacaoController.merge(objetoSelecionado);
+	
+		objetoSelecionado.setStatus("Assumido");
+
+		list.add(objetoSelecionado);
+		objetoSelecionado = new Avaliacao();
+		
+		sucesso();
+		}else {
+			message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Ação Incorreta", "Paciente ainda não chegou na clinica.");
+			error();
+			addMsg("Ação Incorreta Paciente ainda não chegou na clinica.");
+		}
+	}
+	
 	@Override
 	public String novo() throws Exception {
 		setarVariaveisNulas();
@@ -137,6 +185,9 @@ public class AvaliacaoBeanView extends BeanManagedViewAbstract {
 	
 	@Autowired
 	private AvaliacaoController avaliacaoController;
+	
+	
+
 
 	public Avaliacao getObjetoSelecionado() {
 		return objetoSelecionado;
@@ -147,6 +198,48 @@ public class AvaliacaoBeanView extends BeanManagedViewAbstract {
 	}
 	
 
+	public int verificaUsuarioCod() throws Exception{
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext external = context.getExternalContext();
+		String usuario = external.getRemoteUser();
+			
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select * from ");
+		sql.append(" entidade e where  e.ent_login = '" + usuario + "'");
+
+		
+		SqlRowSet sqlRowSet = getController().getJdbcTemplate().queryForRowSet(sql.toString());
+		
+		int id = sqlRowSet.getInt("ent_codigo");
+		
+		return  sqlRowSet.getInt("codigo")  ;
+			
+		
+		
+	}
+	public Boolean verificaPermissao(String role) throws Exception{
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext external = context.getExternalContext();
+		String usuario = external.getRemoteUser();
+		
+		
+		int teste;
+			
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select count(*) as autentica from ");
+		sql.append(" entidadeAcesso ea, entidade e where ea.ent_codigo = e.ent_codigo ");
+		sql.append("and e.ent_login = '" + usuario + "'");
+		sql.append(" and ea.esa_codigo = '" + role +"'");
+		
+		SqlRowSet sqlRowSet = getController().getJdbcTemplate().queryForRowSet(sql.toString());
+		
+		return  sqlRowSet.getInt("autentica") > 0 ;
+			
+		
+		
+	}
+	
+	
 	public String verificaUsuario() throws Exception{
 		FacesMessage message = null;
 		boolean loggedIn = false;
@@ -177,8 +270,11 @@ public class AvaliacaoBeanView extends BeanManagedViewAbstract {
 
 	@Override
 	public String condicaoAndParaPesquisa() throws Exception {
+		
+		
 		// TODO Auto-generated method stub
-		return " and entity.horario_agendamento = '' ";
+		return "and entity.status not in ('Assumido')";
+		//return"";
 	}
 	@Override
 	public void consultarEntidade() throws Exception {
@@ -187,6 +283,7 @@ public class AvaliacaoBeanView extends BeanManagedViewAbstract {
 		list.setTotalRegistroConsulta(totalRegistroConsulta(), SqlLazyQuery());
 	}
 
+	
 	public String SqlLazyQuery() throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select entity from ");
@@ -279,7 +376,9 @@ public class AvaliacaoBeanView extends BeanManagedViewAbstract {
 			sql.append("%'))");
 		
 		sql.append(" ");
-		sql.append(condicaoAndParaPesquisa());
+		//if(verificaPermissao("AVALIACAO_AVALIADOR"))
+			sql.append(condicaoAndParaPesquisa());
+		
 		return sql;
 	}
 

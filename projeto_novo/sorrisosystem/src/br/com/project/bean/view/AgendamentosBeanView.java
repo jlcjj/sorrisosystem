@@ -229,4 +229,10 @@ public class AgendamentosBeanView extends BeanManagedViewAbstract {
 		return "";
 	}
 
+	@Override
+	public void saveNotReturnHorario() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

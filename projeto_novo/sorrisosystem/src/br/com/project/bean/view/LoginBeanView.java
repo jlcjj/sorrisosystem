@@ -111,4 +111,11 @@ public class LoginBeanView extends BeanManagedViewAbstract {
 		return null;
 	}
 
+
+	@Override
+	public void saveNotReturnHorario() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

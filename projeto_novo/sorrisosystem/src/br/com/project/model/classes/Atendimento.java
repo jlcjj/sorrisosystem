@@ -42,7 +42,7 @@ public class Atendimento implements Serializable{
 	
 	
 		
-	@Column(nullable = false, length = 800)
+	@Column(nullable = true, length = 800)
 	private String observacao;
 			
 	
@@ -52,8 +52,20 @@ public class Atendimento implements Serializable{
 	@Version
 	@Column(name = "versionNum")
 	private int versionNum;
+	
+	@ManyToOne
+	@JoinColumn(name = "entidade", nullable = false)
+	@ForeignKey(name = "avaliacao_fk_2")
+	private Entidade entidade = new Entidade();
 
 
+	public Entidade getEntidade() {
+		return entidade;
+	}
+
+	public void setEntidade(Entidade entidade) {
+		this.entidade = entidade;
+	}
 
 	public Long getAtendimento_id() {
 		return atendimento_id;

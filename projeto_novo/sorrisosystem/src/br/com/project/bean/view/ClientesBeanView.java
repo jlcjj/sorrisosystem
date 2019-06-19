@@ -157,6 +157,13 @@ public class ClientesBeanView extends BeanManagedViewAbstract {
 		// TODO Auto-generated method stub
 		return "";
 	}
+
+
+	@Override
+	public void saveNotReturnHorario() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

@@ -18,6 +18,7 @@ public interface ActionViewPadrao extends Serializable{
 	
 	abstract String ativar() throws Exception;
 	
+	abstract void saveNotReturnHorario() throws Exception;
 	/**
 	 * 
 	 * @PostConstruct realiza inicialização de metodos, valores ou variaveis.
@@ -39,5 +40,7 @@ public interface ActionViewPadrao extends Serializable{
 	abstract String redirecionarFindEntidade() throws Exception;
 	
 	abstract void addMsg(String msg);
+
+
 
 }
