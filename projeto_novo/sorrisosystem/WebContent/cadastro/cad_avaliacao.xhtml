@@ -153,17 +153,17 @@
 
 
 
-					<p:column rendered="false">
+					<p:column rendered="true">
 						<p:row>
 							<h:outputLabel id="labelStatusAgendamento" for="status"
 								value="Status :" />
 						</p:row>
 					</p:column>
-					<p:column rendered="false">
+					<p:column rendered="true">
 						<p:row>
 							<p:selectOneMenu id="status"
 								value="#{avaliacaoBeanView.objetoSelecionado.status}"
-								style="width:125px">
+								style="width:125px" required="true">
 								
 								<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
 								
