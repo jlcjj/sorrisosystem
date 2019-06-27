@@ -62,3 +62,19 @@ END$
 
  
 DELIMITER ;
+
+DELIMITER $
+ 
+CREATE  TRIGGER Tgr_Avaliacao_Insert Before update
+ON avaliacao
+FOR EACH ROW
+BEGIN
+	if (new.status = 'Assumido') then
+		insert into atendimento (status, clientes,entidade) values ("Novo", new.clientes,new.ent_codigo);
+	end if;
+   
+END$
+ 
+
+ 
+DELIMITER ;
